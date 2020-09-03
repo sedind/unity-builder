@@ -83,7 +83,7 @@ class ImageTag {
   toString() {
     const { image, tag, suffix } = this;
 
-    if (suffix && suffix.length > 1) {
+    if (suffix && suffix !== '') {
       return `${image}:${tag}-${suffix}`;
     }
 

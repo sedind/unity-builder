@@ -5,9 +5,9 @@ import ImageTag from './image-tag';
 class Docker {
   static async build(buildParameters, silent = false) {
     const { path, dockerfile, baseImage, uid, gid } = buildParameters;
-    const { version, platform } = baseImage;
+    const { version, platform, suffix } = baseImage;
 
-    const tag = new ImageTag({ repository: '', name: 'unity-builder', version, platform });
+    const tag = new ImageTag({ repository: '', name: 'unity-builder', version, platform, suffix });
     const command = `docker build ${path} \
       --file ${dockerfile} \
       --build-arg IMAGE=${baseImage} \
