@@ -7,6 +7,7 @@ class ImageTag {
       repository = 'gableroux',
       name = 'unity3d',
       version = '2019.2.11f1',
+      suffix = '',
       platform,
     } = imageProperties;
 
@@ -24,7 +25,7 @@ class ImageTag {
       ImageTag.imageSuffixes.generic,
     );
 
-    Object.assign(this, { repository, name, version, platform, builderPlatform });
+    Object.assign(this, { repository, name, version, platform, builderPlatform, suffix });
   }
 
   static get versionPattern() {
@@ -80,7 +81,11 @@ class ImageTag {
   }
 
   toString() {
-    const { image, tag } = this;
+    const { image, tag, suffix } = this;
+
+    if (suffix && suffix.length > 1) {
+      return `${image}:${tag}-${suffix}`;
+    }
 
     return `${image}:${tag}`;
   }

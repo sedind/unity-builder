@@ -104,6 +104,10 @@ class Input {
   static get kubeVolume() {
     return core.getInput('kubeVolume') || '';
   }
+
+  static get suffix() {
+    return core.getInput('suffix') || '';
+  }
 }
 
 export default Input;

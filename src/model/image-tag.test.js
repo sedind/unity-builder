@@ -13,6 +13,7 @@ describe('UnityImageVersion', () => {
     repository: 'gableroux',
     name: 'unity3d',
     image: 'gableroux/unity3d',
+    suffix: '',
   };
 
   describe('constructor', () => {
@@ -56,6 +57,16 @@ describe('UnityImageVersion', () => {
       const image = new ImageTag({ version: '2019.2.11f1', platform: 'WebGL' });
 
       expect(image.toString()).toStrictEqual(`${defaults.image}:2019.2.11f1-webgl`);
+    });
+
+    it('returns the specific build platform with suffix', () => {
+      const image = new ImageTag({
+        version: '2019.2.11f1',
+        platform: 'Android',
+        suffix: '2020-08-12',
+      });
+
+      expect(image.toString()).toStrictEqual(`${defaults.image}:2019.2.11f1-android-2020-08-12`);
     });
 
     it('returns no specific build platform for generic targetPlatforms', () => {
