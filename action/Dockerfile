@@ -1,5 +1,5 @@
 ARG IMAGE
-FROM $IMAGE-update-2020-08-12
+FROM $IMAGE
 
 
 ARG UNAME=runner
