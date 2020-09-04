@@ -46,6 +46,9 @@ ARG UNAME=runner
 ARG UID=1000
 ARG GID=1000
 
+RUN chown $UID:$GID -R /opt/Unity
+RUN chmod 755 /opt/Unity
+
 LABEL "com.github.actions.name"="Unity - Builder"
 LABEL "com.github.actions.description"="Build Unity projects for different platforms."
 LABEL "com.github.actions.icon"="box"
