@@ -29,7 +29,8 @@ ENV UNITY_VERSION 2018.4.26f1
 # Preload u3d version cache
 RUN u3d available --no-central -p --unity-version $UNITY_VERSION
 
-ENV UNITY_PACKAGES Unity,Android,Android-sdk-ndk-tools,Android-sdk-platform-tools,Android-sdk-build-tools,Android-sdk-platforms,Android-ndk,Android-open-jdk
+#ENV UNITY_PACKAGES Unity,Android,Android-sdk-ndk-tools,Android-sdk-platform-tools,Android-sdk-build-tools,Android-sdk-platforms,Android-ndk,Android-open-jdk
+ENV UNITY_PACKAGES unity,mono,android,ios
 
 RUN u3d install --trace $UNITY_VERSION -p $UNITY_PACKAGES \
       && rm -rf /root/Downloads
