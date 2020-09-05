@@ -81,11 +81,7 @@ class ImageTag {
   }
 
   toString() {
-    const { image, tag, suffix, platform } = this;
-
-    if (platform === 'android') {
-      return 'gableroux/unity3d@sha256:dd78c209fb6f8925bed52aed1694026c9021170f73169aa68ecc9d5564d5dea5';
-    }
+    const { image, tag, suffix } = this;
 
     if (suffix && suffix !== '') {
       return `${image}:${tag}-${suffix}`;

@@ -7,10 +7,16 @@ class Docker {
     const { path, dockerfile, baseImage, uid, gid } = buildParameters;
     const { version, platform, suffix } = baseImage;
 
+    let img = baseImage;
+    if (platform === 'android') {
+      img =
+        'gableroux/unity3d@sha256:dd78c209fb6f8925bed52aed1694026c9021170f73169aa68ecc9d5564d5dea5';
+    }
+
     const tag = new ImageTag({ repository: '', name: 'unity-builder', version, platform, suffix });
     const command = `docker build ${path} \
       --file ${dockerfile} \
-      --build-arg IMAGE=${baseImage} \
+      --build-arg IMAGE=${img} \
       --build-arg UID=${uid} \
       --build-arg GID=${gid} \
       --tag ${tag}`;
