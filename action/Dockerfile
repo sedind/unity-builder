@@ -62,31 +62,31 @@ ARG SHA1=0cc3abb9c5e3ad4568968f243c371313053bd784
 ARG COMPONENTS=Unity,Windows,Windows-Mono,Mac,Mac-Mono,WebGL
 ENV UNITY_INSTALL_LOCATION /opt/Unity
 
-RUN wget -nv ${DOWNLOAD_URL} -O UnitySetup && \
-    # compare sha1 if given
-    if [ -n "${SHA1}" -a "${SHA1}" != "" ]; then \
-        echo "${SHA1}  UnitySetup" | sha1sum --check -; \
-    else \
-        echo "no sha1 given, skipping checksum"; \
-    fi && \
-    # make executable
-    chmod +x UnitySetup && \
-    # agree with license
-    echo y | \
-    # install unity with required components
-    ./UnitySetup \
-        --unattended \
-        --install-location=$UNITY_INSTALL_LOCATION \
-        --verbose \
-        --download-location=/tmp/unity \
-        --components=$COMPONENTS && \
-    # make a directory for the certificate Unity needs to run
-    mkdir -p /root/.local/share/unity3d/Certificates/ && \
-    # remove setup & temp files
-    rm UnitySetup && \
-    rm -rf /tmp/unity && \
-    rm -rf /root/.local/share/Trash/* && \
-    rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/OpenJDK 
+# RUN wget -nv ${DOWNLOAD_URL} -O UnitySetup && \
+#     # compare sha1 if given
+#     if [ -n "${SHA1}" -a "${SHA1}" != "" ]; then \
+#         echo "${SHA1}  UnitySetup" | sha1sum --check -; \
+#     else \
+#         echo "no sha1 given, skipping checksum"; \
+#     fi && \
+#     # make executable
+#     chmod +x UnitySetup && \
+#     # agree with license
+#     echo y | \
+#     # install unity with required components
+#     ./UnitySetup \
+#         --unattended \
+#         --install-location=$UNITY_INSTALL_LOCATION \
+#         --verbose \
+#         --download-location=/tmp/unity \
+#         --components=$COMPONENTS && \
+#     # make a directory for the certificate Unity needs to run
+#     mkdir -p /root/.local/share/unity3d/Certificates/ && \
+#     # remove setup & temp files
+#     rm UnitySetup && \
+#     rm -rf /tmp/unity && \
+#     rm -rf /root/.local/share/Trash/* && \
+#     rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/Tools/OpenJDK 
 
 ###################
 ## ANDROID SETUP ##
@@ -118,7 +118,7 @@ RUN export JAVA_HOME \
     && mkdir -p ${ANDROID_SDK_ROOT} \
     && chown -R 777 ${ANDROID_INSTALL_LOCATION} \
     && wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip \
-    && unzip -q android-sdk.zip -d ${ANDROID_SDK_ROOT} \
+    && unzip -q -o android-sdk.zip -d ${ANDROID_SDK_ROOT} \
     && rm -f android-sdk.zip \
     && ls -ahl ${ANDROID_SDK_ROOT} \ 
     && yes | sdkmanager \
