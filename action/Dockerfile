@@ -20,6 +20,9 @@ RUN mkdir -p /opt/tmp
 RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/NDK
 RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
 
+RUN wget -q ${ANDROID_SDK_SDKTOOLS} -O /tmp/sdk-tools-linux.zip
+RUN unzip -q /tmp/sdk-tools-linux.zip -d ${ANDROID_HOME}
+
 RUN wget ${ANDROID_SDK_PLATFORMTOOLS} -O /opt/tmp/platform-tools.zip
 RUN unzip -q -o /opt/tmp/platform-tools.zip -d ${ANDROID_HOME} 
 
