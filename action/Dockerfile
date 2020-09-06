@@ -1,10 +1,6 @@
 ARG IMAGE
 FROM $IMAGE
 
-ARG UNAME=runner
-ARG UID=1000
-ARG GID=1000
-
 # Setup Android SDK/JDK Environment Variables
 ENV UNITY_INSTALL_LOCATION /opt/Unity
 ARG ANDROID_NDK=http://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip
@@ -22,15 +18,15 @@ RUN mkdir -p ${ANDROID_INSTALL_LOCATION}
 
 RUN echo "Android Platform tools Install" \
     wget -q ${ANDROID_SDK_PLATFORMTOOLS} -O /tmp/platform-tools.zip \
-    && unzip -q /tmp/platform-tools.zip -d ${ANDROID_HOME} \
+    && unzip -q -o /tmp/platform-tools.zip -d ${ANDROID_HOME} \
     && wget -q ${ANDROID_SDK_BUILDTOOLS} -O /tmp/build-tools.zip \
-    && unzip -q /tmp/build-tools.zip -d ${ANDROID_HOME}/build-tools \
+    && unzip -q -o /tmp/build-tools.zip -d ${ANDROID_HOME}/build-tools \
     && mv ${ANDROID_HOME}/build-tools/android-9 ${ANDROID_HOME}/build-tools/28.0.0 \
     && wget -q ${ANDROID_SDK_PLATFORM} -O /tmp/platform.zip \
-    && unzip -q /tmp/platform.zip -d ${ANDROID_HOME}/platforms \
+    && unzip -q -o /tmp/platform.zip -d ${ANDROID_HOME}/platforms \
     && mv ${ANDROID_HOME}/platforms/android-9 ${ANDROID_HOME}/platforms/android-28 \
     && wget -q ${ANDROID_NDK} -O /tmp/android-ndk.zip \
-    && unzip -q /tmp/android-ndk.zip -d ${ANDROID_NDK_HOME} \
+    && unzip -q -o /tmp/android-ndk.zip -d ${ANDROID_NDK_HOME} \
     && mv ${ANDROID_NDK_HOME}/*/* ${ANDROID_NDK_HOME} \
     && yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
     && chmod -R 777 ${ANDROID_INSTALL_LOCATION} \
@@ -41,7 +37,9 @@ RUN echo "Android Platform tools Install" \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/* 
 
-
+ARG UNAME=runner
+ARG UID=1000
+ARG GID=1000
 
 RUN chown $UID:$GID -R /opt/Unity
 RUN chmod 755 /opt/Unity
