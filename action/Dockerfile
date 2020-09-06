@@ -17,16 +17,15 @@ ENV ANDROID_NDK_HOME ${ANDROID_INSTALL_LOCATION}/NDK
 RUN mkdir -p ${ANDROID_INSTALL_LOCATION}
 RUN mkdir -p /opt/tmp
 
-RUN echo "Android Platform tools Install" \
-    wget -q ${ANDROID_SDK_PLATFORMTOOLS} -O /opt/tmp/platform-tools.zip \
+RUN wget ${ANDROID_SDK_PLATFORMTOOLS} -O /opt/tmp/platform-tools.zip \
     && unzip -q -o /opt/tmp/platform-tools.zip -d ${ANDROID_HOME} \
-    && wget -q ${ANDROID_SDK_BUILDTOOLS} -O /opt/tmp/build-tools.zip \
+    && wget ${ANDROID_SDK_BUILDTOOLS} -O /opt/tmp/build-tools.zip \
     && unzip -q -o /opt/tmp/build-tools.zip -d ${ANDROID_HOME}/build-tools \
     && mv ${ANDROID_HOME}/build-tools/android-9 ${ANDROID_HOME}/build-tools/28.0.0 \
-    && wget -q ${ANDROID_SDK_PLATFORM} -O /opt/tmp/platform.zip \
+    && wget ${ANDROID_SDK_PLATFORM} -O /opt/tmp/platform.zip \
     && unzip -q -o /opt/tmp/platform.zip -d ${ANDROID_HOME}/platforms \
     && mv ${ANDROID_HOME}/platforms/android-9 ${ANDROID_HOME}/platforms/android-28 \
-    && wget -q ${ANDROID_NDK} -O /opt/tmp/android-ndk.zip \
+    && wget ${ANDROID_NDK} -O /opt/tmp/android-ndk.zip \
     && unzip -q -o /opt/tmp/android-ndk.zip -d ${ANDROID_NDK_HOME} \
     && mv ${ANDROID_NDK_HOME}/*/* ${ANDROID_NDK_HOME} \
     && yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
