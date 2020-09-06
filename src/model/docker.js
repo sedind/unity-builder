@@ -10,7 +10,8 @@ class Docker {
     let img = baseImage;
     if (platform === 'android' || platform === 'Android') {
       // img = 'sedind/unity3d:2018.4.26f1-android';
-      img = 'gableroux/unity3d:2018.4.26f1-android-update-2020-08-12';
+      img =
+        'gableroux/unity3d@sha256:e38dab4ee3d56f85de041a2b184bea58d9338bca4787f87e8c165a438eb3c299';
     }
 
     const tag = new ImageTag({ repository: '', name: 'unity-builder', version, platform, suffix });
