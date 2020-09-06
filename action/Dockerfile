@@ -21,7 +21,7 @@ ENV ANDROID_NDK_HOME ${ANDROID_INSTALL_LOCATION}/NDK
 RUN mkdir -p ${ANDROID_INSTALL_LOCATION}
 
 RUN echo "Android Platform tools Install" \
-    && wget -q ${ANDROID_SDK_PLATFORMTOOLS} -O /tmp/platform-tools.zip \
+    wget -q ${ANDROID_SDK_PLATFORMTOOLS} -O /tmp/platform-tools.zip \
     && unzip -q /tmp/platform-tools.zip -d ${ANDROID_HOME} \
     && wget -q ${ANDROID_SDK_BUILDTOOLS} -O /tmp/build-tools.zip \
     && unzip -q /tmp/build-tools.zip -d ${ANDROID_HOME}/build-tools \
