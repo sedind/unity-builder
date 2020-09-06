@@ -17,6 +17,9 @@ ENV ANDROID_NDK_HOME ${ANDROID_INSTALL_LOCATION}/NDK
 RUN mkdir -p ${ANDROID_INSTALL_LOCATION}
 RUN mkdir -p /opt/tmp
 
+RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/NDK
+RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
+
 RUN wget ${ANDROID_SDK_PLATFORMTOOLS} -O /opt/tmp/platform-tools.zip \
     && unzip -q -o /opt/tmp/platform-tools.zip -d ${ANDROID_HOME} \
     && wget ${ANDROID_SDK_BUILDTOOLS} -O /opt/tmp/build-tools.zip \
