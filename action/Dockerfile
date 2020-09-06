@@ -21,17 +21,21 @@ RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/NDK
 RUN rm -rf /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK
 
 RUN wget ${ANDROID_SDK_PLATFORMTOOLS} -O /opt/tmp/platform-tools.zip \
-    && unzip -q -o /opt/tmp/platform-tools.zip -d ${ANDROID_HOME} \
-    && wget ${ANDROID_SDK_BUILDTOOLS} -O /opt/tmp/build-tools.zip \
+    && unzip -q -o /opt/tmp/platform-tools.zip -d ${ANDROID_HOME} 
+
+RUN wget ${ANDROID_SDK_BUILDTOOLS} -O /opt/tmp/build-tools.zip \
     && unzip -q -o /opt/tmp/build-tools.zip -d ${ANDROID_HOME}/build-tools \
-    && mv ${ANDROID_HOME}/build-tools/android-9 ${ANDROID_HOME}/build-tools/28.0.0 \
-    && wget ${ANDROID_SDK_PLATFORM} -O /opt/tmp/platform.zip \
+    && mv ${ANDROID_HOME}/build-tools/android-9 ${ANDROID_HOME}/build-tools/28.0.0 
+
+RUN wget ${ANDROID_SDK_PLATFORM} -O /opt/tmp/platform.zip \
     && unzip -q -o /opt/tmp/platform.zip -d ${ANDROID_HOME}/platforms \
-    && mv ${ANDROID_HOME}/platforms/android-9 ${ANDROID_HOME}/platforms/android-28 \
-    && wget ${ANDROID_NDK} -O /opt/tmp/android-ndk.zip \
+    && mv ${ANDROID_HOME}/platforms/android-9 ${ANDROID_HOME}/platforms/android-28
+
+RUN wget ${ANDROID_NDK} -O /opt/tmp/android-ndk.zip \
     && unzip -q -o /opt/tmp/android-ndk.zip -d ${ANDROID_NDK_HOME} \
-    && mv ${ANDROID_NDK_HOME}/*/* ${ANDROID_NDK_HOME} \
-    && yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
+    && mv ${ANDROID_NDK_HOME}/*/* ${ANDROID_NDK_HOME}
+
+RUN  yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
     && chmod -R 777 ${ANDROID_INSTALL_LOCATION} \
     && ls -ahl ${ANDROID_HOME} \
     && apt-get autoremove \
