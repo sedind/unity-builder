@@ -7,6 +7,7 @@ ARG GID=1000
 
 RUN chown $UID:$GID -R /opt/Unity
 RUN chmod 755 /opt/Unity
+RUN ln -s /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.3 /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.0
 
 LABEL "com.github.actions.name"="Unity - Builder"
 LABEL "com.github.actions.description"="Build Unity projects for different platforms."
