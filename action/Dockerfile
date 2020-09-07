@@ -7,7 +7,10 @@ ARG GID=1000
 
 RUN chown $UID:$GID -R /opt/Unity
 RUN chmod 755 /opt/Unity
-RUN ["/bin/bash", "-c", "test -d /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.3 &&  mv /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.3 /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.0"]
+
+#fix for android and iOS
+RUN mkdir -p /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.3
+RUN mv /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.3 /opt/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/build-tools/28.0.0
 
 # ARG ANDROID_SDK_BUILDTOOLS=http://dl.google.com/android/repository/build-tools_r28-linux.zip
 # RUN wget -q ${ANDROID_SDK_BUILDTOOLS} -O /tmp/build-tools.zip 
